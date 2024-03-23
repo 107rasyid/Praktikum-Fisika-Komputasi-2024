@@ -7,14 +7,22 @@ h(1) = 0;
 x0 = 3;
 eksak = 6792;
 nilai_h = 0.0001;
+
+fprintf('--------------------------------------------------------------\n');
+fprintf('   h           Nilai Turunan            Error\n');
+fprintf('--------------------------------------------------------------\n');
+
 for i = 2:10
     h(i) = h(i-1) + nilai_h;
     diff = (fx(x0 + h(i)) - fx(x0 - h(i))) / (2 * h(i));
     error(i) = abs(diff - eksak) * 100 / diff;
     hasil_turunan(i) = diff;
-    display(['nilai turunan dengan h = ', num2str(h(i)), ' adalah ', num2str(hasil_turunan(i))])
+    %display(['nilai turunan dengan h = ', num2str(h(i)), ' adalah ', num2str(hasil_turunan(i))])
     %display(['nilai error dengan h = ', num2str(h(i)), ' adalah ', num2str(error(i))])
+    fprintf('%10.6f   %15.6f   %15.6f\n', h(i), hasil_turunan(i), error(i));
 end
+
+fprintf('--------------------------------------------------------------\n');
 
 subplot(2,1,1); %plot nilai turunan dari iterasi nilai h
 plot(h, hasil_turunan, 'b-');
